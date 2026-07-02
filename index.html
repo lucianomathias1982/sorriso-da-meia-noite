@@ -544,14 +544,14 @@ secs.forEach((s,i)=>{
 const dotEls=[...dots.children];
 const io=new IntersectionObserver(es=>{
   es.forEach(e=>{
-    if(e.isIntersecting){
+    if(e.isIntersecting && e.intersectionRect.height>innerHeight*.3){
       e.target.classList.add('on');
       const i=secs.indexOf(e.target);
       cur.textContent=i+1;
       dotEls.forEach((d,j)=>d.classList.toggle('cur',j===i));
     }
   });
-},{root:deck,threshold:.35});
+},{root:deck,threshold:[0,.1,.2,.3,.4,.5]});
 secs.forEach(s=>io.observe(s));
 document.addEventListener('keydown',e=>{
   const i=parseInt(cur.textContent)-1;
@@ -561,6 +561,3 @@ document.addEventListener('keydown',e=>{
 </script>
 </body>
 </html>
-
-<!-- build 13 -->
-<!-- build 14 -->
